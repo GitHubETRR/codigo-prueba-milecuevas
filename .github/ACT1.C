@@ -1,8 +1,12 @@
 #include <stdio.h>
 
-int main(void){
-    
-    printf("holaaaaaaaaaa");
-    return(0);
+int main()
+{
+    int edad;
+    printf("ingrese su edad\n");
+    scanf("%d",&edad);
+    int año = 2024 - edad;
+    printf("usted nació en el año %d ",año);
 
+    return 0;
 }
