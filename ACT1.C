@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main()
+int main(void)
 {
     int edad;
     printf("ingrese su edad\n");
