@@ -12,5 +12,5 @@ int main (void)
         printf("su numero ingresado es impar");
     }
 
-return 0;
+    return 0;
 }
