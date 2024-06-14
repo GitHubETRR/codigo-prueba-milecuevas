@@ -14,4 +14,6 @@ int main (void)
     }else{
         printf("la suma de sus numeros ingresados da como resultado un numero impar\n");
     }
+
+    return 0; 
 }
