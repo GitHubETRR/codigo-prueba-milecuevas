@@ -14,6 +14,7 @@ int main(void)
         if(peso>20){
             int CostPesoL = ((peso - 20)/5)*800;
             int CostTotal = CostPesoL + largo;
+            
             printf("su costo total de envio es de %d\n",CostTotal);
         }else{
             printf("su costo total de envio es de %d\n",largo);
