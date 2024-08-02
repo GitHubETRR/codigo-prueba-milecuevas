@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    int nota;
+    unsigned int nota;
     printf("ingrese la calificacion entera de un alumno\n");
     scanf("%d",&nota);
     if(nota==10){
