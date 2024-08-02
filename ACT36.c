@@ -1,5 +1,6 @@
 #include <stdio.h>  
 #define CORTA_DIST 1
+#define LARGA_DIST 2
 #define COSTO_VCORTO 1500
 #define COSTO_VLARGO 2000
 int main(void)
@@ -13,11 +14,11 @@ int main(void)
     if(viaje==CORTA_DIST){
         if(peso>20){
             int CostPesoL = ((peso - 20)/5)*800;
-            int CostTotal = CostPesoL + largo;
+            int CostTotal = CostPesoL + COSTO_VLARGO;
             
             printf("su costo total de envio es de %d\n",CostTotal);
         }else{
-            printf("su costo total de envio es de %d\n",largo);
+            printf("su costo total de envio es de %d\n",COSTO_VLARGO);
         }
     }else{
         if(peso>20){
@@ -25,7 +26,7 @@ int main(void)
             int CostTotal = CostPesoC + COSTO_VCORTO;
             printf("su costo total de envio es de %d\n",CostTotal);
         }else{
-            printf("su costo total de envio es de %d\n",corto);
+            printf("su costo total de envio es de %d\n",COSTO_VCORTO);
         }
     }  
     return 0;                 
