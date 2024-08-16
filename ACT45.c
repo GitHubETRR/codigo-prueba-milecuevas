@@ -10,4 +10,5 @@ int main()
             printf("su numero ingresado es positivo\n");
         }
     }
+    return 0;
 }
