@@ -15,23 +15,24 @@ typedef struct{
 void imprimir(caracteristicas_t);
 
 caracteristicas_t spiderman = {"spiderman", 100, 100, 100, 100, "muñequeras", "sentido aracnido", "se aferra a la mayoría de las superficies"};
-
+caracteristicas_t duende_verde = {"duende verde", 100, 100, 100, 100, "granadas", "planeador", "curación regenerativa"};
 int main()
 {
-    printf("LARA HACE ESTO(PRESENTACION SPIDERMAN)\n");
+    printf("PRESENTACION SPIDERMAN\n");
     imprimir(spiderman);
-
+    printf("PRESENTACION DUENDE VERDE\n");
+    imprimir(duende_verde);
     return 0;
 }
 
-void imprimir(caracteristicas_t spiderman)
+void imprimir(caracteristicas_t personaje)
 {
-    printf("Nombre:%s\n",spiderman.nombre);
-    printf("Velocidad:%d\n",spiderman.velocidad);
-    printf("Fuerza:%d\n",spiderman.fuerza);
-    printf("Reflejos:%d\n",spiderman.reflejos);
-    printf("Vida:%f\n",spiderman.vida);
-    printf("Poder 1:%s\n",spiderman.poderes1);
-    printf("Poder 2:%s\n",spiderman.poderes2);
-    printf("Poder 3:%s\n",spiderman.poderes3);
+    printf("Nombre:%s\n",personaje.nombre);
+    printf("Velocidad:%d\n",personaje.velocidad);
+    printf("Fuerza:%d\n",personaje.fuerza);
+    printf("Reflejos:%d\n",personaje.reflejos);
+    printf("Vida:%f\n",personaje.vida);
+    printf("Poder/armadura 1:%s\n",personaje.poderes1);
+    printf("Poder/armadura 2:%s\n",personaje.poderes2);
+    printf("Poder/armadura 3:%s\n\n",personaje.poderes3);
 }
