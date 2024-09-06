@@ -27,61 +27,71 @@ Cada vector debe tener una capacidad de 100 elementos.
 6.Condiciones de finalización: El programa debe continuar ejecutándose hasta que el usuario seleccione la opción de salir.*/
 
 #include <stdio.h>
+#include <stdlib.h>
 #define LIMITE 100
+#define VACIO 0
 
 typedef struct{
     char nombre[LIMITE];
-    int codigos[LIMITE];
-    int cantidades[LIMITE];
-    float precios[LIMITE];
+    int codigo;
+    int cantidad;
+    float precio;
 }producto_t;
 
+typedef enum{
+    SALIR,
+    AGREGAR_PRODUCTO,
+    MOSTRAR_PRODUCTOS,
+    BUSCAR_PRODUCTO,
+    MODIFICAR_CANTIDAD,
+    ELIMINAR_PRODUCTO,
+}opcion_t;
+
 int Bienvenida();
-producto_t AgregarProducto();
-void MostarProducto(producto_t[]);
-void BuscarProducto(producto_t[], int);
+void AgregarProducto(producto_t[],int);
+void MostrarProducto(producto_t[]);
+void BuscarProducto(producto_t [], int);
 int ModificarCantidad(producto_t[], int);
 int EliminarProducto(producto_t[], int);
 
-
-
-
 int main(){
-    int opcion;
-    opcion=Bienvenida();
+    opcion_t opcion;
+    int cantProductos=0;
+    int buscar_codigo;
+    producto_t productos[LIMITE]={0};
+   
     do{
+        opcion=Bienvenida();
         switch (opcion){
-        case 1:
-            AgregarProducto();
-        break;
-        
-        case 2:
-            /* code */
-        break;
-        
-        case 3:
-            /* code */
-        break;
-        
-        case 4:
-            /* code */
-        break;
-        
-        case 5:
-            /* code */
-        break;
-        
-        default:
-        break;
-    }
-    } while (opcion!=0);
-    
-    
-    
+            case AGREGAR_PRODUCTO:
+                AgregarProducto(productos,cantProductos);
+            break;
+           
+            case MOSTRAR_PRODUCTOS:
+                MostrarProducto(productos);
+            break;
+           
+            case BUSCAR_PRODUCTO:
+                printf("Ingrese el codigo del producto que quiere buscar");
+                scanf("%d",&buscar_codigo);
+                BuscarProducto(productos,buscar_codigo);
+            break;
+           
+            case MODIFICAR_CANTIDAD:
+                /* code */
+            break;
+           
+            case ELIMINAR_PRODUCTO:
+                /* code */
+            break;
+           
+            default:
+            break;
+        }
+    } while (opcion!=SALIR);    
 }
 
 int Bienvenida(){
-
     int opcion;
     printf("Este programa gestiona un inventario de productos de una tienda\n");
     printf("Ingrese:\n");
@@ -92,35 +102,38 @@ int Bienvenida(){
     printf("(5):Eliminar un producto\n");
     printf("(0):Salir\n");
     scanf("%d",&opcion);
+    system("clear");
     return opcion;
 }
 
-producto_t AgregarProducto(){
-    producto_t producto;
+void AgregarProducto(producto_t productos[],int indice){
     int i;
-    for (i=0;i<LIMITE;i++){
-        if (producto.cantidades[i]==0){
-            printf("Ingrese el nombre del producto: ");
-            scanf("%s",&producto.nombre[i]);
-            printf("Ingrese la cantidad del producto: ");
-            scanf("%d",&producto.cantidades[i]);
-            printf("Ingrese el codigo del producto: ");
-            scanf("%d",&producto.codigos[i]);
-            printf("Ingrese el precio del producto: ");
-            scanf("%d",&producto.precios[i]);
-            return producto;
-            }
-        }
+    for(i=0;(i<LIMITE) && (productos[i].codigo!=VACIO) ;i++);
+    if(i!=LIMITE){
+        printf("Ingrese por favor el nombre del producto\n");
+        scanf("%s",productos[i].nombre);
+        printf("Ingrese el codigo de producto\n");
+        scanf ("%d",&(productos[i].codigo));
+        printf("Producto agregado correctamente en la posicion %d\n",i);
+       
+    }else{
+        printf("No hay mas lugar\n");
+    }
+   
 }
 
-void MostarProducto(producto_t Producto[]){
-    int i;
-    for (i=0;i<LIMITE;i++){
-        if (Producto.cantidades[i]!=0){
-            printf("Nombre: %s\n",Producto.nombre[i]);
-            printf("Cantidad: %d\n",Producto.cantidades[i]);
-            printf("Precio: %f\n",Producto.precio[i]);
-            printf("Codigo:%d",Producto.codigo[i]);
+void MostrarProducto(producto_t productos[]){
+    for(int i=0;i<LIMITE;i++){
+        if(productos[i].codigo!=VACIO){
+            printf("Nombre del producto: %s\n",productos[i].nombre);
+            printf("Codigo del producto: %d\n",productos[i].codigo);
+
         }
+       
     }
+   
+}
+
+void BuscarProducto(producto_t productos[],int codigo_buscar){
+   
 }
