@@ -39,16 +39,16 @@ typedef struct{
 }producto_t;
 
 typedef enum{
-    SALIR,
-    AGREGAR_PRODUCTO,
-    MOSTRAR_PRODUCTOS,
-    BUSCAR_PRODUCTO,
-    MODIFICAR_CANTIDAD,
-    ELIMINAR_PRODUCTO,
+    SALIR, //Representa un 0
+    AGREGAR_PRODUCTO,//Representa un 1
+    MOSTRAR_PRODUCTOS,//Representa un 2
+    BUSCAR_PRODUCTO,//Representa un 3
+    MODIFICAR_CANTIDAD,//Representa un 4
+    ELIMINAR_PRODUCTO,//Representa un 5
 }opcion_t;
 
 int Bienvenida();
-void AgregarProducto(producto_t[],int);
+int AgregarProducto(producto_t[],int);
 void MostrarProducto(producto_t[]);
 void BuscarProducto(producto_t [], int);
 int ModificarCantidad(producto_t[], int);
@@ -59,32 +59,33 @@ int main(){
     int cantProductos=0;
     int buscar_codigo;
     producto_t productos[LIMITE]={0};
-   
     do{
         opcion=Bienvenida();
         switch (opcion){
             case AGREGAR_PRODUCTO:
-                AgregarProducto(productos,cantProductos);
+                cantProductos=AgregarProducto(productos,cantProductos);
             break;
-           
+            
             case MOSTRAR_PRODUCTOS:
                 MostrarProducto(productos);
             break;
-           
+            
             case BUSCAR_PRODUCTO:
-                printf("Ingrese el codigo del producto que quiere buscar");
+                printf("Ingrese el codigo del producto que quiere buscar\n");
                 scanf("%d",&buscar_codigo);
                 BuscarProducto(productos,buscar_codigo);
             break;
-           
+            
             case MODIFICAR_CANTIDAD:
-                /* code */
+                printf("Ingrese el codigo del producto que quiere modificar la cantidad\n");
+                scanf("%d",&buscar_codigo);
+                    ModificarCantidad(productos,buscar_codigo);
             break;
-           
+            
             case ELIMINAR_PRODUCTO:
                 /* code */
             break;
-           
+            
             default:
             break;
         }
@@ -96,7 +97,7 @@ int Bienvenida(){
     printf("Este programa gestiona un inventario de productos de una tienda\n");
     printf("Ingrese:\n");
     printf("(1):Para agregar un producto \n");
-    printf("(2):Mostras los productos\n");
+    printf("(2):Mostrar los productos\n");
     printf("(3):Buscar un producto\n");
     printf("(4):Modificar la cantidad de un producto\n");
     printf("(5):Eliminar un producto\n");
@@ -106,7 +107,7 @@ int Bienvenida(){
     return opcion;
 }
 
-void AgregarProducto(producto_t productos[],int indice){
+int AgregarProducto(producto_t productos[],int cantProductos){
     int i;
     for(i=0;(i<LIMITE) && (productos[i].codigo!=VACIO) ;i++);
     if(i!=LIMITE){
@@ -114,26 +115,58 @@ void AgregarProducto(producto_t productos[],int indice){
         scanf("%s",productos[i].nombre);
         printf("Ingrese el codigo de producto\n");
         scanf ("%d",&(productos[i].codigo));
+        printf("Ingrese el precio del producto\n");
+        scanf("%f",&(productos[i].precio));
+        printf("Ingrese la cantidad del producto\n");
+        scanf("%d",&(productos[i].cantidad));
         printf("Producto agregado correctamente en la posicion %d\n",i);
-       
     }else{
         printf("No hay mas lugar\n");
     }
-   
+    cantProductos++;
+    return cantProductos;
+    
+    
 }
 
 void MostrarProducto(producto_t productos[]){
+    int i;
     for(int i=0;i<LIMITE;i++){
         if(productos[i].codigo!=VACIO){
-            printf("Nombre del producto: %s\n",productos[i].nombre);
-            printf("Codigo del producto: %d\n",productos[i].codigo);
-
-        }
-       
+            printf("Nombre del producto: %s\n"   ,productos[i].nombre);
+            printf("Precio del producto:%.2f\n"  ,productos[i].precio );
+            printf("Cantidad del producto:%d\n"  ,productos[i].cantidad);
+            printf("Codigo del producto: %d\n\n" ,productos[i].codigo);
+        }        
     }
-   
 }
 
 void BuscarProducto(producto_t productos[],int codigo_buscar){
-   
+    int i;
+    for (i=0; i<LIMITE; i++){
+        if(productos[i].codigo==codigo_buscar && productos[i].codigo!=VACIO){
+            printf("Nombre del producto: %s\n"   ,productos[i].nombre);
+            printf("Precio del producto:%.2f\n"  ,productos[i].precio );
+            printf("Cantidad del producto:%d\n"  ,productos[i].cantidad);
+            printf("Codigo del producto: %d\n\n" ,productos[i].codigo);
+            break;
+        }else("No existe un producto con ese codigo");
+    }
+}
+
+int ModificarCantidad(producto_t productos[], int codigo_buscar){
+    int i,nueva_cantidad;
+    for (i=0; i<LIMITE; i++){
+        if(productos[i].codigo==codigo_buscar && productos[i].codigo!=VACIO){
+            printf("Nombre del producto: %s\n"   ,productos[i].nombre);
+            printf("Precio del producto:%.2f\n"  ,productos[i].precio );
+            printf("Cantidad del producto:%d\n"  ,productos[i].cantidad);
+            printf("Codigo del producto: %d\n\n" ,productos[i].codigo);
+            break;
+        }else("No existe un producto con ese codigo");
+    }
+    printf("Ingrese la nueva cantidad de producto: ");
+    scanf("%d",&nueva_cantidad);
+    productos[i].cantidad=nueva_cantidad;
+    printf("Cantidad modificada correctamente, ahora su producto tiene %d unidades\n",nueva_cantidad);
 }
