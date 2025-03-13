@@ -1,0 +1,79 @@
+#include <stdio.h>
+#define LIMITE 100
+#define VACIO 0
+
+typedef struct
+{
+    char nombre[LIMITE];
+    char mail[LIMITE];
+    int numero;
+}contacto_t;
+
+int bienvenida();
+void agregarContactos(contacto_t[]);
+void mostrarContactos(contacto_t[]);
+
+int main()
+{
+    do
+    {
+        opcion=bienvenida();
+        switch ()
+        {
+        case 1:
+            
+            break;
+        
+        default:
+            break;
+        }
+    } while (/*opcion!=0*/);
+    
+
+}
+
+int bienvenida()
+{
+    int opcion;
+    printf("este programa simula una lista de contactos\n");
+    printf("ingrese 1 para agregar un contacto\n");
+    printf("ingrese 2 para mostrar los contactos\n");
+    printf("ingrese 0 para salir\n");
+    scanf("%d",&opcion);
+    return opcion;
+}
+
+void agregarContactos(contacto_t[])
+{
+    int i;
+    for (i = 0; i < LIMITE; i++)
+    {
+        if (i!=LIMITE)
+        {
+            printf("por favor, ingrese el nombre de su contacto\n");
+            scanf("%s",&contacto[i].nombre);
+            printf("por favor, ingrese el mail de su contacto\n");
+            scanf("%s",&contacto[i].mail);
+            printf("por favor, ingrese el numero de telefono de su contacto\n");
+            scanf("%d",&contacto[i].numero);
+        }else{
+            printf("no hay mas lugar");
+        }
+        
+    }
+}
+
+void mostrarContactos(contacto_t[])
+{
+    int i;
+    for (i = 0; i < LIMITE; i++)
+    {
+        if(contacto[i].nombre!=VACIO)
+        {
+            printf("nombre:%s",contacto[i].nombre);
+            printf("mail:%s",contacto[i].mail);
+            printf("numero:%d",contacto[i].numero);
+        }
+    }
+    
+}

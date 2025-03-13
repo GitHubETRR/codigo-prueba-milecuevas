@@ -59,6 +59,7 @@ int main(){
     int cantProductos=0;
     int buscar_codigo;
     producto_t productos[LIMITE]={0};
+    
     do{
         opcion=Bienvenida();
         switch (opcion){
@@ -112,7 +113,7 @@ int AgregarProducto(producto_t productos[],int cantProductos){
     for(i=0;(i<LIMITE) && (productos[i].codigo!=VACIO) ;i++);
     if(i!=LIMITE){
         printf("Ingrese por favor el nombre del producto\n");
-        scanf("%s",productos[i].nombre);
+        scanf("%s",&productos[i].nombre);
         printf("Ingrese el codigo de producto\n");
         scanf ("%d",&(productos[i].codigo));
         printf("Ingrese el precio del producto\n");
@@ -170,3 +171,4 @@ int ModificarCantidad(producto_t productos[], int codigo_buscar){
     productos[i].cantidad=nueva_cantidad;
     printf("Cantidad modificada correctamente, ahora su producto tiene %d unidades\n",nueva_cantidad);
 }
+
