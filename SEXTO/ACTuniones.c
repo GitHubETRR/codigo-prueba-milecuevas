@@ -8,7 +8,7 @@ union{
 
 int main()
 {
-var.valor=24;
+var.valor=24; //cálculos hechos
 printf("%x\n",var.bytes[0]);
 printf("%x\n",var.bytes[1]);
 printf("%x\n",var.bytes[2]);
