@@ -1,4 +1,5 @@
 #include <stdio.h>
+//probando punteros
 
 void mostrar(int *);
 
