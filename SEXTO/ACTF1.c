@@ -24,6 +24,7 @@ typedef enum{
 
 int inicio();
 pilotos_t* agregarPiloto(pilotos_t *lista);
+void mostrarPilotos(pilotos_t *lista);
 
 int main()
 {
@@ -37,6 +38,9 @@ int main()
         {
             case agregarPilotos:
                 lista = agregarPiloto(lista);
+                break;
+            case mostrarPilotos:
+                mostrarPilotos(lista);
                 break;
         }
     }while (opción!=salir);
@@ -78,5 +82,17 @@ pilotos_t * agregarPiloto(pilotos_t * lista){
         printf("Piloto agregado correctamente!\n\n");
         piloto_ptr->next = lista;
         return piloto_ptr;
+    }
+    
+void mostrarPilotos(pilotos_t *lista){
+        while (lista != NULL){
+        printf("Nombre: %s\n", lista->nombre);
+        printf("Apellido: %s\n",lista->apellido);
+        printf("Número de auto: %d\n", lista->numAuto);
+        printf("Escudería: %s\n", lista->escuderia);
+        printf("Puntos campeonato de pilotos: %d\n", lista->puntCampPilotos);
+        printf("Puntos campeonato de constructores: %d\n", lista->puntCampConstr);//REVISAR
+        lista = lista->next;
+        }
     }
 }
