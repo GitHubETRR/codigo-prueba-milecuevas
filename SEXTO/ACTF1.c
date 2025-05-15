@@ -15,59 +15,68 @@ typedef struct{
 
 typedef enum{
     salir,
-    agregarPiloto,//0
-    mostrarPiloto,//1
-    buscarPiloto,//2
-    modificarPiloto,//3
-    eliminarPiloto,//4
-}opciones_t
+    agregarPilotos,//0
+    mostrarPilotos,//1
+    buscarPilotos,//2
+    modificarPilotos,//3
+    eliminarPilotos,//4
+}opciones_t;
 
 int inicio();
-
+pilotos_t* agregarPiloto(pilotos_t *lista);
 
 int main()
 {
+    int opción; 
+    pilotos_t *lista = NULL;
+
     do
     {
         opción=inicio();
-    } while (opción!=salir);
-    
+        switch (opción) 
+        {
+            case agregarPilotos:
+                lista = agregarPiloto(lista);
+                break;
+        }
+    }while (opción!=salir);
+    return 0;
 }
-
-int inicio()
-{
+ 
+    int inicio()
+    {
     int opcion;
     printf("Bienvenido! Este programa es una base de datos de los pilotos de F1\n");
     printf("Ingrese:\n");
     printf("(1):Para agregar un piloto \n");
     printf("(2):Mostrar un piloto\n");
-    printf("(3):Buscar un piloto\n");
+    printf("(3):Buscar un piloto\n");//REVISAR
     printf("(4):Modificar los puntos de los campeonatos\n");
     printf("(5):Eliminar un piloto\n");
     printf("(0):Salir\n");
     scanf("%d",&opcion);
     return opcion;
-}
+    }
 
-void agregarPiloto()
-{
+pilotos_t * agregarPiloto(pilotos_t * lista){
     pilotos_t *piloto_ptr = (pilotos_t *)malloc(sizeof(pilotos_t));
     if (piloto_ptr == NULL) {
         printf("No hay más memoria\n");
-        return;
-    }else
-    {
+        return lista;
+    }else{
         printf("ingrese el nombre del piloto:\n");
         scanf("%s",piloto_ptr->nombre);
         printf("ingrese el apellido del piloto:\n");
         scanf("%s",piloto_ptr->apellido);
         printf("ingrese el númeor del auto del piloto:\n");
-        scanf("%d",piloto_ptr->numAuto);
+        scanf("%d",&piloto_ptr->numAuto);
         printf("ingrese la escudería del piloto:\n");
-        scanf("%d",piloto_ptr->escuderia);
+        scanf("%s",piloto_ptr->escuderia);
         printf("ingrese los puntos en el campeonato de pilotos:\n");
-        scanf("%d",piloto_ptr->puntCampPilotos);
-        printf("ingrese los puntos en el campeonato de constructores:\n");//a revisar
+        scanf("%d",&piloto_ptr->puntCampPilotos);
+        printf("ingrese los puntos en el campeonato de constructores:\n");//REVISAR
+        printf("Piloto agregado correctamente!\n\n");
+        piloto_ptr->next = lista;
+        return piloto_ptr;
     }
-    
 }
