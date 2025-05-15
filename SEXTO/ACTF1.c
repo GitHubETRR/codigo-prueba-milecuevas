@@ -92,7 +92,7 @@ void mostrarPilotos(pilotos_t *lista){
         printf("Escudería: %s\n", lista->escuderia);
         printf("Puntos campeonato de pilotos: %d\n", lista->puntCampPilotos);
         printf("Puntos campeonato de constructores: %d\n", lista->puntCampConstr);//REVISAR
-        lista = lista->next;
+        lista = lista->next;;
         }
     }
 }
