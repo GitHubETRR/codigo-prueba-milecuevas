@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define LIMITE 50
 
-typedef struct{
+typedef struct pilotos{
     char nombre[LIMITE];
     char apellido[LIMITE];
     int numAuto;
@@ -14,12 +14,12 @@ typedef struct{
 }pilotos_t;
 
 typedef enum{
-    salir,//0
-    agregarPilotos,//1
-    mostrarPilotos,//2
-    buscarPilotos,//3
-    modificarPilotos,//4
-    eliminarPilotos,//5
+    SALIR,//0
+    AGREGARPILOTOS,//1
+    MOSTRARPILOTOS,//2
+    BUSCARPILOTOS,//3
+    MODIFICARPILOTOS,//4
+    ELIMINARPILOTOS,//5
 }opciones_t;
 
 int inicio();
@@ -28,8 +28,6 @@ void mostrarPiloto(pilotos_t *lista);
 void liberar (pilotos_t *lista);
 void buscarPiloto(pilotos_t *lista, int numeroBuscar);
 void modificarPuntos(pilotos_t *lista, int numeroMod);
-
-
 
 int main()
 {
@@ -40,29 +38,29 @@ int main()
         opción=inicio();
         switch (opción) 
         {
-            case agregarPilotos:
+            case AGREGARPILOTOS:
                 lista = agregarPiloto(lista);
                 break;
-            case mostrarPilotos:
+            case MOSTRARPILOTOS:
                 mostrarPiloto(lista);
                 break;
-            case buscarPilotos:
+            case BUSCARPILOTOS:
                 int numeroBuscar;
                 printf("Ingrese el número de auto a buscar:\n");
                 scanf("%d", &numeroBuscar);
                 buscarPiloto(lista, numeroBuscar);
                 break;
-            case modificarPilotos:
+            case MODIFICARPILOTOS:
                 int numeroMod;
                 printf("Ingrese el número de auto del piloto a modificar:\n");
                 scanf("%d", &numeroMod);
                 modificarPuntos(lista, numeroMod);
                 break;
-            case eliminarPilotos:
+            case ELIMINARPILOTOS:
                 //funcion;
                 break;
         }
-    }while (opción!=salir);
+    }while (opción!=SALIR);
     liberar(lista);
     return 0;
 }
@@ -77,7 +75,7 @@ int main()
     printf("(3):Buscar un piloto\n");
     printf("(4):Modificar los puntos de los campeonatos\n");
     printf("(5):Eliminar un piloto\n");
-    printf("(0):Salir\n");
+    printf("(0):SALIR\n");
     scanf("%d",&opcion);
     return opcion;
     }
@@ -116,7 +114,7 @@ void mostrarPiloto(pilotos_t *lista)
         printf("Escudería: %s\n", lista->escuderia);
         printf("Puntos campeonato de pilotos: %d\n\n", lista->puntCampPilotos);
         //printf("Puntos campeonato de constructores: %d\n\n", lista->puntCampConstr);
-        lista = lista->next;;
+        lista = lista->next;
         }
     }
 
@@ -156,12 +154,12 @@ void modificarPuntos(pilotos_t *lista, int numeroMod)
 }
 
 void liberar (pilotos_t *lista)
+{
+    pilotos_t *aux;
+    while(lista!=NULL)
     {
-        pilotos_t *aux;
-        while(lista!=NULL)
-        {
-            aux=lista;
-            lista=lista->next;
-            free(aux);
-        }
+        aux=lista;
+        lista=lista->next;
+        free(aux);
     }
+}
