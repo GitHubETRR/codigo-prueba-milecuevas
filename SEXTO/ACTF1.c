@@ -31,12 +31,12 @@ void modificarPuntos(pilotos_t *lista, int numeroMod);
 
 int main()
 {
-    int opción; 
+    int opcion; 
     pilotos_t *lista = NULL;
     do
     {
-        opción=inicio();
-        switch (opción) 
+        opcion=inicio();
+        switch (opcion) 
         {
             case AGREGARPILOTOS:
                 lista = agregarPiloto(lista);
@@ -45,22 +45,26 @@ int main()
                 mostrarPiloto(lista);
                 break;
             case BUSCARPILOTOS:
+            {
                 int numeroBuscar;
-                printf("Ingrese el número de auto a buscar:\n");
+                printf("Ingrese el numero de auto a buscar:\n");
                 scanf("%d", &numeroBuscar);
                 buscarPiloto(lista, numeroBuscar);
                 break;
+            }
             case MODIFICARPILOTOS:
+            {
                 int numeroMod;
-                printf("Ingrese el número de auto del piloto a modificar:\n");
+                printf("Ingrese el numero de auto del piloto a modificar:\n");
                 scanf("%d", &numeroMod);
                 modificarPuntos(lista, numeroMod);
                 break;
+            }
             case ELIMINARPILOTOS:
                 //funcion;
                 break;
         }
-    }while (opción!=SALIR);
+    }while (opcion!=SALIR);
     liberar(lista);
     return 0;
 }
@@ -91,9 +95,9 @@ pilotos_t * agregarPiloto(pilotos_t * lista)
         scanf("%s",piloto_ptr->nombre);
         printf("ingrese el apellido del piloto:\n");
         scanf("%s",piloto_ptr->apellido);
-        printf("ingrese el número del auto del piloto:\n");
+        printf("ingrese el numero del auto del piloto:\n");
         scanf("%d",&piloto_ptr->numAuto);
-        printf("ingrese la escudería del piloto:\n");
+        printf("ingrese la escuderia del piloto:\n");
         scanf("%s",piloto_ptr->escuderia);
         printf("ingrese los puntos en el campeonato de pilotos:\n");
         scanf("%d",&piloto_ptr->puntCampPilotos);
@@ -110,8 +114,8 @@ void mostrarPiloto(pilotos_t *lista)
         {
         printf("Nombre: %s\n", lista->nombre);
         printf("Apellido: %s\n",lista->apellido);
-        printf("Número de auto: %d\n", lista->numAuto);
-        printf("Escudería: %s\n", lista->escuderia);
+        printf("Numero de auto: %d\n", lista->numAuto);
+        printf("Escuderia: %s\n", lista->escuderia);
         printf("Puntos campeonato de pilotos: %d\n\n", lista->puntCampPilotos);
         //printf("Puntos campeonato de constructores: %d\n\n", lista->puntCampConstr);
         lista = lista->next;
@@ -127,8 +131,8 @@ void buscarPiloto(pilotos_t *lista, int numeroBuscar)
             printf("Piloto encontrado:\n\n");
             printf("Nombre: %s\n", lista->nombre);
             printf("Apellido: %s\n", lista->apellido);
-            printf("Número de auto: %d\n", lista->numAuto);
-            printf("Escudería: %s\n", lista->escuderia);
+            printf("Numero de auto: %d\n", lista->numAuto);
+            printf("Escuderia: %s\n", lista->escuderia);
             printf("Puntos campeonato de pilotos: %d\n\n", lista->puntCampPilotos);
         }
         lista = lista->next;
