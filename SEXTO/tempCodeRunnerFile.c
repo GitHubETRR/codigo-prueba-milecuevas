@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define LIMITE 50
 
-typedef struct pilotos{
+typedef struct{
     char nombre[LIMITE];
     char apellido[LIMITE];
     int numAuto;
@@ -28,6 +28,8 @@ void mostrarPiloto(pilotos_t *lista);
 void liberar (pilotos_t *lista);
 void buscarPiloto(pilotos_t *lista, int numeroBuscar);
 void modificarPuntos(pilotos_t *lista, int numeroMod);
+
+
 
 int main()
 {
@@ -114,7 +116,7 @@ void mostrarPiloto(pilotos_t *lista)
         printf("Escudería: %s\n", lista->escuderia);
         printf("Puntos campeonato de pilotos: %d\n\n", lista->puntCampPilotos);
         //printf("Puntos campeonato de constructores: %d\n\n", lista->puntCampConstr);
-        lista = lista->next;
+        lista = lista->next;;
         }
     }
 
