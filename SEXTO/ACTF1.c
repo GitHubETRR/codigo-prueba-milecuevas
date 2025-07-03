@@ -28,6 +28,7 @@ void mostrarPiloto(pilotos_t *lista);
 void liberar (pilotos_t *lista);
 void buscarPiloto(pilotos_t *lista, int numeroBuscar);
 void modificarPuntos(pilotos_t *lista, int numeroMod);
+void guardarArchivos(pilotos_t *lista);
 
 int main()
 {
@@ -71,7 +72,7 @@ int main()
 
 int inicio()
 {
-int opcion;
+    int opcion;
     printf("Bienvenido! Este programa es una base de datos de los pilotos de F1\n");
     printf("Ingrese:\n");
     printf("(1):Para agregar un piloto \n");
@@ -108,6 +109,7 @@ pilotos_t * agregarPiloto(pilotos_t * lista)
     }
 }
 
+    
 void mostrarPiloto(pilotos_t *lista)
 {
     while (lista != NULL)
@@ -155,6 +157,32 @@ void modificarPuntos(pilotos_t *lista, int numeroMod)
         }
         lista = lista->next;
     }
+}
+
+void guardarArchivos(pilotos_t *lista)
+{
+    FILE *archivo = fopen("datos.txt", "w");
+    if(archivo==NULL)
+    {
+        printf("No se pudo abrir el archivo\n");
+        return;
+    }
+    while (lista != NULL)
+    {
+        fprintf(archivo, "%s\n", lista->nombre);
+        fprintf(archivo, "%s\n", lista->apellido);
+        fprintf(archivo, "%d\n", lista->numAuto);
+        fprintf(archivo, "%s\n", lista->escuderia);
+        fprintf(archivo, "%d\n", lista->puntCampPilotos);
+        lista = lista->next;
+        fclose(archivo);
+        return;
+    }  
+}
+
+void leerArchivo(pilotos_t *lista)
+{
+    
 }
 
 void liberar (pilotos_t *lista)
