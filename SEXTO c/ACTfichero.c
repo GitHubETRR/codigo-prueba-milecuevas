@@ -15,7 +15,6 @@ typedef struct pacientes
     float peso;
     char obraSocial[LIMITE];
     int telEmergencia;
-    //char diagnostico[LIMITE];
     struct pacientes *next;
 }pacientes_t;
 
@@ -59,10 +58,6 @@ int main()
             }
             case MODIFICARPACIENTES:
             {
-                /*int ;
-                printf("Ingrese el numero de auto del piloto a modificar:\n");
-                scanf("%d", &numeroMod);
-                modificarPuntos(lista, numeroMod);*/
                 break;
             }
             case ELIMINARPACIENTES:
@@ -114,8 +109,6 @@ pacientes_t* agregarPacientes(pacientes_t *lista)
         scanf(" %s",pacientes_ptr->obraSocial);
         printf("ingrese un telefono en caso de emergencia:\n");
         scanf("%d",&pacientes_ptr->telEmergencia);
-        //printf("ingrese el diagnostico del paciente:\n");
-        //scanf(" %s",pacientes_ptr->diagnostico);
         printf("paciente agregado correctamente!\n\n");
         pacientes_ptr->next = lista;
         return pacientes_ptr;
@@ -135,7 +128,6 @@ void mostrarPacientes(pacientes_t *lista)
         printf("Peso del paciente:%f\n",lista->peso);
         printf("Obra social del paciente:%s\n",lista->obraSocial);
         printf("Telefono en caso de emergencia:%d\n\n",lista->telEmergencia);
-        //printf("Diagnostico del paciente:%s\n",lista->diagnostico);
         lista=lista->next;
     }
 }
