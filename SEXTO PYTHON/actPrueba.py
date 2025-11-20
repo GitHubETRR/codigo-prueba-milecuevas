@@ -3,7 +3,7 @@ agenda = []
 def mostrarMenu():
     print("MENU")
     print("1. agregar contacto")
-    print("2. ver contactos")
+    print("2. mostar contactos")
     print("3. buscar contacto")
     print("4. modificar contacto")
     print("5. eliminar contacto")
@@ -14,21 +14,29 @@ def agregarContacto():
     apellido = input("apellido: ")
     edad = input("edad: ")
     telefono = input("teléfono: ")
-    contacto = {"nombre": nombre, "apellido": apellido, "edad": edad, "telefono": telefono}
+    
+    contacto = {
+        "nombre": nombre, 
+        "apellido": apellido, 
+        "edad": edad, 
+        "telefono": telefono
+    }
+    
     agenda.append(contacto)
     print("contacto agregado\n")
 
-def verContactos():
+def mostrarContactos():
     if len(agenda) == 0:
         print("no hay contactos guardados\n")
     else:
-        print("\nCONTACTOS:")
+        print("CONTACTOS:\n")
         i = 1
         for contacto in agenda:
-            print(str(i) + ". " + contacto["nombre"] + " " + contacto["apellido"])
+            print("\nCONTACTO" + " " + str(i))
+            print(contacto["nombre"] + " " + contacto["apellido"])
             print("edad: " + contacto["edad"])
             print("teléfono: " + contacto["telefono"])
-            i = i + 1
+            i += 1
 
 def buscarContacto():
     nombreBuscado = input("ingrese el nombre a buscar: ")
@@ -36,6 +44,7 @@ def buscarContacto():
     for contacto in agenda:
         if contacto["nombre"] == nombreBuscado:
             print("\nencontrado:")
+            print("CONTACTO")
             print(contacto["nombre"] + " " + contacto["apellido"])
             print("edad: " + contacto["edad"])
             print("teléfono: " + contacto["telefono"])
@@ -44,7 +53,7 @@ def buscarContacto():
         print("no se encontró ningún contacto con ese nombre.\n")
 
 def modificarContacto():
-    verContactos()
+    mostarContactos()
     if len(agenda) == 0:
         return
     num = int(input("ingrese el número del contacto a modificar: "))
@@ -68,13 +77,12 @@ def modificarContacto():
         else:
             print("opción inválida")
             return
-
         print("contacto modificado\n")
     else:
         print("número inválido\n")
 
 def eliminarContacto():
-    verContactos()
+    mostarContactos()
     if len(agenda) == 0:
         return
     num = int(input("ingrese el número del contacto a eliminar: "))
@@ -86,12 +94,11 @@ def eliminarContacto():
 
 while True:
     mostrarMenu()
-    opcion = input("elige una opcion: ")
-
+    opcion = input("elige una opción: ")
     if opcion == "1":
         agregarContacto()
     elif opcion == "2":
-        verContactos()
+        mostarContactos()
     elif opcion == "3":
         buscarContacto()
     elif opcion == "4":
@@ -102,4 +109,4 @@ while True:
         print("chauu")
         break
     else:
-        print("opcion invalida\n")
+        print("opción inválida\n")
