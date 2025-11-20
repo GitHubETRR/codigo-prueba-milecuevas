@@ -28,7 +28,6 @@ def verContactos():
             print(str(i) + ". " + contacto["nombre"] + " " + contacto["apellido"])
             print("edad: " + contacto["edad"])
             print("teléfono: " + contacto["telefono"])
-            print()
             i = i + 1
 
 def buscarContacto():
@@ -40,7 +39,6 @@ def buscarContacto():
             print(contacto["nombre"] + " " + contacto["apellido"])
             print("edad: " + contacto["edad"])
             print("teléfono: " + contacto["telefono"])
-            print()
             encontrado = True
     if not encontrado:
         print("no se encontró ningún contacto con ese nombre.\n")
