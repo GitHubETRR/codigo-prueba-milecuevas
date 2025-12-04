@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 #define MAX 20
 
@@ -17,22 +18,23 @@ public:
 
     string getNombre() 
     { 
-        return nombre; 
+        return nombre;
     }
     
-    string getApellido() 
+    string getApellido()
     { 
         return apellido; 
     }
-    
+
     void setNombre(string n) 
     { 
-        nombre = n;
+        nombre = n; 
     }
     
     void setApellido(string a) 
     { 
         apellido = a; 
+        
     }
 };
 
@@ -57,13 +59,17 @@ public:
         cout << "Ingrese nombre: ";
         cin >> n;
         setNombre(n);
+
         cout << "Ingrese apellido: ";
         cin >> a;
         setApellido(a);
+
         cout << "Ingrese escuderia: ";
         cin >> escuderia;
+
         cout << "Ingrese numero de auto: ";
         cin >> numAuto;
+
         cout << "Ingrese puntos en el campeonato: ";
         cin >> puntos;
     }
@@ -123,83 +129,151 @@ public:
     }
 
     int getNumAuto() 
-    { 
+    {
         return numAuto; 
-        
+    }
+    
+    string getEscuderia() 
+    { 
+        return escuderia; 
+    }
+    
+    int getPuntos() 
+    { 
+        return puntos; 
     }
 };
+
+void mostrarCampeon(piloto pilotos[], int cantidad)
+{
+    if (cantidad == 0)
+    {
+        cout << "No hay pilotos cargados\n";
+        return;
+    }
+
+    int camp = 0;
+    for (int i = 1; i < cantidad; i++)
+    {
+        if (pilotos[i].getPuntos() > pilotos[camp].getPuntos())
+        {
+            camp = i;
+        }
+    }
+
+    cout << "\nCAMPEÓN DEL CAMPEONATO DE PILOTOS\n";
+    pilotos[camp].mostrar();
+}
+
+void guardarBaseCompleta(piloto pilotos[], int cantidad)
+{
+    ofstream archivo("pilotos.txt");
+
+    if (!archivo)
+    {
+        cout << "No se pudo abrir el archivo\n";
+        return;
+    }
+
+    archivo << "BASE COMPLETA DE PILOTOS\n\n";
+    for (int i = 0; i < cantidad; i++)
+    {
+        archivo << "Piloto " << i + 1 << ":\n";
+        archivo << "Nombre: " << pilotos[i].getNombre() << "\n";
+        archivo << "Apellido: " << pilotos[i].getApellido() << "\n";
+        archivo << "Escuderia: " << pilotos[i].getEscuderia() << "\n";
+        archivo << "Numero de auto: " << pilotos[i].getNumAuto() << "\n";
+        archivo << "Puntos: " << pilotos[i].getPuntos() << "\n";
+        archivo << "\n";
+    }
+
+    archivo.close();
+    cout << "La base de datos se guardó correctamente\n";
+}
 
 int main() 
 {
     piloto pilotos[MAX];
     int cantidad = 0;
     int opcion;
+
     do {
         cout << "\nSeleccione una opcion\n";
         cout << "1. Cargar piloto\n";
         cout << "2. Mostrar pilotos\n";
         cout << "3. Editar piloto\n";
         cout << "4. Buscar piloto\n";
-        cout << "5. Salir\n";
+        cout << "5. Ver campeón\n";
+        cout << "6. Guardar base completa\n";
+        cout << "7. Salir\n";
         cout << "Ingrese opcion: ";
         cin >> opcion;
+
         switch (opcion)
         {
             case 1:
-                if (cantidad < 20) 
+                if (cantidad < MAX) 
                 {
                     pilotos[cantidad].cargar();
                     cantidad++;
-                } else {
-                    cout << "No se pueden cargar mas pilotos.\n";
+                } 
+                else 
+                {
+                    cout << "No se pueden cargar mas pilotos\n";
                 }
                 break;
+
             case 2:
-                if (cantidad == 0) 
-                {
-                    cout << "No hay pilotos cargados.\n";
-                } else {
-                    for (int i = 0; i < cantidad; i++) 
+                if (cantidad == 0)
+                    cout << "No hay pilotos cargados\n";
+                else {
+                    for (int i = 0; i < cantidad; i++)
                     {
                         cout << "\nPiloto " << i + 1 << "\n";
                         pilotos[i].mostrar();
                     }
                 }
                 break;
-            case 3: 
+
+            case 3:
             {
                 if (cantidad == 0) 
                 {
-                    cout << "No hay pilotos para editar.\n";
+                    cout << "No hay pilotos para editar\n";
                     break;
                 }
                 int indice;
                 cout << "Ingrese numero de piloto a editar (1-" << cantidad << "): ";
                 cin >> indice;
+
                 if (indice > 0 && indice <= cantidad)
                 {
-                    cout << "Datos actuales:\n";
-                    pilotos[indice - 1].mostrar();
                     pilotos[indice - 1].editar();
-                } else {
-                    cout << "Numero no valido.\n";
+                } 
+                else 
+                {
+                    cout << "Numero no valido\n";
                 }
                 break;
             }
-            case 4: 
+
+            case 4:
             {
                 if (cantidad == 0) 
                 {
-                    cout << "No hay pilotos cargados.\n";
+                    cout << "No hay pilotos cargados\n";
                     break;
                 }
+
                 int numBuscar;
                 cout << "Ingrese el numero de auto a buscar: ";
                 cin >> numBuscar;
+
                 bool encontrado = false;
-                for (int i = 0; i < cantidad; i++) 
+
+                for (int i = 0; i < cantidad; i++)
                 {
-                    if (pilotos[i].getNumAuto() == numBuscar) 
+                    if (pilotos[i].getNumAuto() == numBuscar)
                     {
                         cout << "\nPiloto encontrado:\n";
                         pilotos[i].mostrar();
@@ -207,14 +281,27 @@ int main()
                         break;
                     }
                 }
+
                 if (!encontrado)
                     cout << "No hay ningun piloto con ese numero de auto\n";
+
                 break;
             }
+
             case 5:
+                mostrarCampeon(pilotos, cantidad);
+                break;
+
+            case 6:
+                guardarBaseCompleta(pilotos, cantidad);
+                break;
+
+            case 7:
                 cout << "Chauuuuu\n";
                 break;
         }
-    } while (opcion != 5);
+
+    } while (opcion != 7);
+
     return 0;
 }
